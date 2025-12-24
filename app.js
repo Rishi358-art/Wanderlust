@@ -75,7 +75,10 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
-
+app.get("/",async (req,res)=>{
+     const allListings=await Listing.find({});
+     res.render("listings/index",{allListings});
+})
 app.use("/listing",listings);
 app.use("/listing/:id/reviews",reviews);
 app.use("/",users);
